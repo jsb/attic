@@ -10,27 +10,27 @@ EvacuationVersion = '1.01'
 require 'rubygems'
 require 'gosu'
 
-require 'scene.rb'
-require 'assets.rb'
-require 'main_menu.rb'
-require 'game.rb'
-require 'game_object.rb'
-require 'road.rb'
-require 'house.rb'
-require 'villager.rb'
-require 'awod.rb'
-require 'decal.rb'
-require 'player_character.rb'
-require 'bubble.rb'
-require 'bunker.rb'
-require 'particle.rb'
-require 'message.rb'
-require 'powerup.rb'
+require_relative 'scene.rb'
+require_relative 'assets.rb'
+require_relative 'main_menu.rb'
+require_relative 'game.rb'
+require_relative 'game_object.rb'
+require_relative 'road.rb'
+require_relative 'house.rb'
+require_relative 'villager.rb'
+require_relative 'awod.rb'
+require_relative 'decal.rb'
+require_relative 'player_character.rb'
+require_relative 'bubble.rb'
+require_relative 'bunker.rb'
+require_relative 'particle.rb'
+require_relative 'message.rb'
+require_relative 'powerup.rb'
 
-require 'shader'
-require 'shake_effect'
-require 'damage_effect'
-require 'game_over_effect'
+require_relative 'shader.rb'
+require_relative 'shake_effect.rb'
+require_relative 'damage_effect.rb'
+require_relative 'game_over_effect.rb'
 
 class GameWindow < Gosu::Window
   attr_accessor :scene
@@ -40,7 +40,7 @@ class GameWindow < Gosu::Window
     super(640, 480, full_screen)
     $window = self
     
-    @scene = Game.new(self) #@scene = MainMenu.new(self)
+    @scene = MainMenu.new(self)
     
     self.caption = "Evacuation"
   end

@@ -150,17 +150,17 @@ class Game < Scene
   
   def button_down(id)
     case id
-      when Gosu::KbEscape:
+      when Gosu::KbEscape
         @window.scene = MainMenu.new(@window)
-      when Gosu::KbP, Gosu::GpButton9:
+      when Gosu::KbP, Gosu::GpButton9
         @paused = !@paused
-      when Gosu::KbReturn:
+      when Gosu::KbReturn
         @window.scene = Game.new(@window) if @game_over or @won
-      when Gosu::KbE, Gosu::GpButton1:
+      when Gosu::KbE, Gosu::GpButton1
         if active and @powerups[0]
           @powerups.shift.activate
         end
-      when Gosu::KbTab, Gosu::GpButton2:
+      when Gosu::KbTab, Gosu::GpButton2
         if active and @powerups.size >= 2
           @powerups << @powerups.shift
         end
