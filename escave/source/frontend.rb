@@ -29,7 +29,7 @@ class Frontend
   end
   
   def draw
-    Images['media/title.png'].draw(0,0)
+    Images['media/title.png'].draw(0,0,0)
     
     # get the menu screen that's currently selected
     menu = @contents[@location]
@@ -53,8 +53,11 @@ class Frontend
   end
   
   def highscores
-    highscore_file = File.readlines('media/highscores.txt')
-    highscores = highscore_file.collect {|line| if(line =~ /(\d+)/) then $1.to_i else nil end}.compact.sort.reverse[0...5]
+    highscores = []
+    if File.exist?('media/highscores.txt')
+      highscore_file = File.readlines('media/highscores.txt')
+      highscores = highscore_file.collect {|line| if(line =~ /(\d+)/) then $1.to_i else nil end}.compact.sort.reverse[0...5]
+    end
     
     @contents[1] = [MenuEntry.new('Back', method(:main_menu))]
     highscores.each do |highscore|

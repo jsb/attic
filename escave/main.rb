@@ -1,6 +1,6 @@
 require 'gosu'
-require 'game'
-require 'frontend'
+require_relative 'source/game.rb'
+require_relative 'source/frontend.rb'
 
 class MainWindow < Gosu::Window
   def initialize()

@@ -6,7 +6,7 @@ class Images
     if @@images[name]
       @@images[name]
     else
-      @@images[name] = Gosu::Image.new($screen, name, false)
+      @@images[name] = Gosu::Image.new(name, :tileable => false)
     end
   end
 end
@@ -17,7 +17,7 @@ class Tiles
     if @@tiles[name]
       @@tiles[name]
     else
-      @@tiles[name] = Gosu::Image.load_tiles($screen, name, 32,32, true)
+      @@tiles[name] = Gosu::Image.load_tiles(name, 32,32, :tileable => true)
     end
   end
 end
@@ -28,7 +28,7 @@ class Sounds
     if @@sounds[name]
       @@sounds[name]
     else
-      @@sounds[name] = Gosu::Sample.new($screen, name)
+      @@sounds[name] = Gosu::Sample.new(name)
     end
   end
 end
@@ -468,8 +468,11 @@ class Player < Moveable
     $game.scroll_speed = 0.0
     
     # save highscore
-    highscore_file = File.readlines('media/highscores.txt')
-    highscores = highscore_file.collect {|line| if(line =~ /(\d+)/) then $1.to_i else nil end}.push($game.meters).compact.sort.reverse
+    highscores = []
+    if File.exist?('media/highscores.txt')
+      highscore_file = File.readlines('media/highscores.txt')
+      highscores = highscore_file.collect {|line| if(line =~ /(\d+)/) then $1.to_i else nil end}.push($game.meters).compact.sort.reverse
+    end
     rank = highscores.index($game.meters)
     f = File.open('media/highscores.txt', 'w')
       f.puts highscores
@@ -588,7 +591,7 @@ class FireFountain
   end
   
   def draw(xscroll=0.0)
-    Images['media/firefountain.bmp'].draw_rot(@x-xscroll,@y, ZOrder::Items)
+    Images['media/firefountain.bmp'].draw_rot(@x-xscroll,@y, ZOrder::Items, 0.0)
   end
 end
 
